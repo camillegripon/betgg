@@ -9,7 +9,7 @@ export function AuthProvider({ children }) {
     const [role, setRole] = useState(null);
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/user/check-auth", {
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/api/user/check_auth`, {
             method: "GET",
             credentials: "include"
         })

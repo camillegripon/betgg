@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { AuthContext } from "../context/AuthContext";
-import "../styles/loginPage.css";
+import "../styles/LoginPage.css";
 
 function LoginPage() {
     const [formData, setFormData] = useState({ pseudo: "", email: "", password: "" });

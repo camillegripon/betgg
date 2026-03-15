@@ -4,7 +4,7 @@ function AfficherChampion () {
     const [allChampions, setAllChampions] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/champions")
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/api/champions`)
             .then((response)=> response.json())
             .then((data)=> {
                 console.log(data);

@@ -8,7 +8,7 @@ function Header() {
     const navigate = useNavigate(); 
 
     function handleLogout() {
-        fetch("http://localhost:5000/api/user/logout", {
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/api/user/logout`, {
             method: "POST",
             credentials: "include"
         })

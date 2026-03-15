@@ -10,7 +10,7 @@ function Home() {
     const {isLogged, user} = useContext(AuthContext)
     // Récupère les matchs
     useEffect(() => {
-        fetch("http://localhost:5000/api/matches")
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/api/matches`)
             .then((response) => response.json())
             .then((data) => {
                 const sortedMatches = data.map(match => ({
@@ -35,7 +35,7 @@ function Home() {
 
         const fetchBets = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/bets/current?id_user=${user.id_user}`, {
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/bets/current?id_user=${user.id_user}`, {
                     credentials: 'include'
                 });
 

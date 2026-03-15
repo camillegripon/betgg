@@ -12,7 +12,7 @@ function Connexion() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-                const response = await fetch("http://localhost:5000/api/user/connexion", {
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/user/connexion`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

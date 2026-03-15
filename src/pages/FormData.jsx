@@ -61,7 +61,7 @@ function MatchForm() {
 
     useEffect(() => {
         const fetchTeamName = async () => {
-            const response = await fetch("http://localhost:5000/api/admin/");
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/admin`);
             const data = await response.json();
             setTeamName(data);
         }
@@ -83,7 +83,7 @@ const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Données envoyées au backend:", formData);  // ✅ Log 8
     try {
-        const response = await fetch("http://localhost:5000/api/matches/addBO", {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/addBO`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData),

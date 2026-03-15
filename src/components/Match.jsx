@@ -53,7 +53,7 @@ function Match({ name1, name2, victoire, date, odds1, odds2, id }) {
         };
 
         try {
-            const response = await fetch("http://localhost:5000/api/bets", {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/bets`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(betData)

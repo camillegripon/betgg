@@ -54,9 +54,9 @@ function Home() {
     }, [isLogged, user?.id_user]); // ✅ Déclenche le useEffect quand user.id_user change
 
     return (
-        <div className="homeContainer">
+<>
             <Header />
-
+        <div className="homeContainer">
             {/* ✅ Panneau latéral pour les paris en cours */}
             {bets.length > 0 && (
                 <div className="betsSidebar">
@@ -113,7 +113,10 @@ function Home() {
                     )}
                 </div>
         </div>
+        <div className="emptyColonne"></div>
         </div>
+
+</>
     );
 }
 

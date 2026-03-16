@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import "../styles/match.css";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
-import { useState} from "react";
+import { useState } from "react";
 
 
 function Match({ name1, name2, victoire, date, odds1, odds2, id }) {
@@ -10,8 +10,8 @@ function Match({ name1, name2, victoire, date, odds1, odds2, id }) {
 
     //const newDate = new Date(date).toLocaleDateString("fr-FR");
     const { isLogged } = useContext(AuthContext);
-    const [selectedTeam, setSelectedTeam] = useState(null); 
-    const [betAmount, setBetAmount] = useState(""); 
+    const [selectedTeam, setSelectedTeam] = useState(null);
+    const [betAmount, setBetAmount] = useState("");
 
 
     const logos = {
@@ -38,7 +38,7 @@ function Match({ name1, name2, victoire, date, odds1, odds2, id }) {
         setSelectedTeam({ name: team, odds });
     };
 
-    const handleBet = async () => {  // ✅ Nouvelle fonction pour valider le pari
+    const handleBet = async () => {
         const amount = parseFloat(betAmount);
         if (isNaN(amount) || amount <= 0) {
             alert("Montant invalide");
@@ -53,23 +53,35 @@ function Match({ name1, name2, victoire, date, odds1, odds2, id }) {
         };
 
         try {
+            console.log("Données envoyées :", betData); // Log 1
             const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/bets`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
+                credentials: 'include',
                 body: JSON.stringify(betData)
             });
+
             const data = await response.json();
+            console.log("Réponse complète :", data); // Log 2 : Vérifie la structure exacte
+
             if (response.ok) {
-                alert(`Pari validé ! Gain potentiel: ${data.payout.toFixed(2)}`);
-                setSelectedTeam(null);  // ✅ Masque la div après succès
+                // ✅ Vérifie que data.payout existe et est valide
+                const payout = data.payout ? parseFloat(data.payout) : 0;
+                console.log("Payout calculé :", payout); // Log 3
+
+                alert(`Pari validé ! Gain potentiel: ${payout.toFixed(2)}`);
+                console.log("Avant setSelectedTeam :", selectedTeam); // Log 4
+                setSelectedTeam(null);
+                console.log("Après setSelectedTeam :", selectedTeam); // Log 5
             } else {
-                alert(`Erreur: ${data.error}`);
+                alert(`Erreur: ${data.error || "Erreur inconnue"}`);
             }
         } catch (error) {
-            console.error("Erreur:", error);
-            alert("Erreur serveur. Réessaye plus tard.");
+            console.error("Erreur complète :", error);
+            alert("Erreur réseau. Vérifie la console.");
         }
     };
+
 
 
 
@@ -81,42 +93,42 @@ function Match({ name1, name2, victoire, date, odds1, odds2, id }) {
                 <div className="equipe2">{name2}<img src={logos[name2]} alt="Logo de l'équipe 2" /></div>
                 <div className="date">{date.toLocaleString("fr-FR")}</div>
             </div>
-           {isLogged && new Date(date) >= new Date() && (
-    <div className="bet">
-        <div className="betButtons">
-<button
-            onClick={() => handleTeamSelect(name1, odds1)}
-            className={selectedTeam?.name === name1 ? "selected" : ""}
-        >
-            {name1} {odds1 ? `(${odds1})` : "(N/A)"}
-        </button>
-        <button
-            onClick={() => handleTeamSelect(name2, odds2)}
-            className={selectedTeam?.name === name2 ? "selected" : ""}
-        >
-            {name2} {odds2 ? `(${odds2})` : "(N/A)"}
-        </button>
-</div>
-        {selectedTeam && (
-            <div className="betAmountForm">
-                <input
-                    type="number"
-                    placeholder="Montant (ex: 10)"
-                    value={betAmount}
-                    onChange={(e) => setBetAmount(e.target.value)}
-                    min="1"
-                    step="0.5"
-                />
-                {betAmount > 0 && (
-                    <p className="potentialGain">
-                        Gain potentiel: {(betAmount * selectedTeam.odds).toFixed(2)} €
-                    </p>
-                )}
-                <button onClick={handleBet}>Valider</button>
-            </div>
-        )}
-    </div>
-)}
+            {isLogged && new Date(date) >= new Date() && (
+                <div className="bet">
+                    <div className="betButtons">
+                        <button
+                            onClick={() => handleTeamSelect(name1, odds1)}
+                            className={selectedTeam?.name === name1 ? "selected" : ""}
+                        >
+                            {name1} {odds1 ? `(${odds1})` : "(N/A)"}
+                        </button>
+                        <button
+                            onClick={() => handleTeamSelect(name2, odds2)}
+                            className={selectedTeam?.name === name2 ? "selected" : ""}
+                        >
+                            {name2} {odds2 ? `(${odds2})` : "(N/A)"}
+                        </button>
+                    </div>
+                    {selectedTeam && (
+                        <div className="betAmountForm">
+                            <input
+                                type="number"
+                                placeholder="Montant (ex: 10)"
+                                value={betAmount}
+                                onChange={(e) => setBetAmount(e.target.value)}
+                                min="1"
+                                step="0.5"
+                            />
+                            {betAmount > 0 && (
+                                <p className="potentialGain">
+                                    Gain potentiel: {(betAmount * selectedTeam.odds).toFixed(2)} €
+                                </p>
+                            )}
+                            <button onClick={handleBet}>Valider</button>
+                        </div>
+                    )}
+                </div>
+            )}
 
         </div>
     );

@@ -41,6 +41,14 @@ h2 {
     position: relative;
 }
 
+.matchScore {
+    margin: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); 
+    font-size: larger;
+}
+
 .equipe1, .equipe2 {
     display: flex;
     align-items: center;

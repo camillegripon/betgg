@@ -86,6 +86,7 @@ function Home() {
                                 name2={match.team2_name}
                                 victoire={match.winner_team_name}
                                 date={match.match_date}
+                                score={match.score}
                                 odds1={match.team1_odds}
                                 odds2={match.team2_odds}
                             />
@@ -102,9 +103,10 @@ function Home() {
                             <Match
                                 key={index}
                                 id={match.id_game}
-                                name1={match.team1_name}
+                                name1={match.team1_name} 
                                 name2={match.team2_name}
                                 victoire={match.winner_team_name}
+                                score={match.score}
                                 date={match.match_date}
                             />
                         ))

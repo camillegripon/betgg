@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { useState } from "react";
 
 
-function Match({ name1, name2, victoire, date, odds1, odds2, id }) {
+function Match({ name1, name2, victoire, date, odds1, odds2, id, score }) {
     const { user } = useContext(AuthContext);
 
     //const newDate = new Date(date).toLocaleDateString("fr-FR");
@@ -89,7 +89,7 @@ function Match({ name1, name2, victoire, date, odds1, odds2, id }) {
         <div className="matchBet">
             <div className="matchDetails">
                 <div className="equipe1"><img src={logos[name1]} />{name1}</div>
-                <div className={`victoire ${name1 === victoire ? "victoire1" : "victoire2"}`}></div>
+                {score && <div className="matchScore">{score}</div>}
                 <div className="equipe2">{name2}<img src={logos[name2]} alt="Logo de l'équipe 2" /></div>
                 <div className="date">{date.toLocaleString("fr-FR")}</div>
             </div>
@@ -141,7 +141,8 @@ Match.propTypes = {
     victoire: PropTypes.string,
     date: PropTypes.isRequired,
     odds1: PropTypes.number,
-    odds2: PropTypes.number
+    odds2: PropTypes.number,
+    score: PropTypes.string,
 };
 
 export default Match;

@@ -84,7 +84,7 @@ function MatchForm() {
         event.preventDefault();
         console.log("Données envoyées au backend:", formData);  // ✅ Log 8
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/addBO`, {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/matches/addBO`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),

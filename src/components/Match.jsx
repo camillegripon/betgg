@@ -31,7 +31,11 @@ function Match({ name1, name2, victoire, date, odds1, odds2, id, score }) {
         "TOP Esports": "/assets/logo/TES_logo.png",
         "Bilibili Gaming": "/assets/logo/Bilibili_Gaming.png",
         "BNK FEARX": "/assets/logo/BNK_FEARX.png",
-        "Team Secret Whales": "/assets/logo/Team_Secret_Whales_logo.png"
+        "Team Secret Whales": "/assets/logo/Team_Secret_Whales_logo.png",
+        "LOUD": "/assets/logo/LOUD_logo.png",
+        "Lyon": "/assets/logo/Lyon_logo.png",
+        "Gen.G": "/assets/logo/Gen.G_logo.png",
+        "JD Gaming": "/assets/logo/JD_Gaming_logo.png"
     };
 
     const handleTeamSelect = (team, odds) => {  // ✅ Remplace ton handleBet actuel

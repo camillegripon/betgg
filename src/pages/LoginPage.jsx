@@ -8,7 +8,7 @@ function LoginPage() {
     const [formData, setFormData] = useState({ pseudo: "", email: "", password: "" });
     const [loginData, setLoginData] = useState({ pseudo: "", password: "" });
     const [error, setError] = useState("");
-    const [activeTab, setActiveTab] = useState("login"); 
+    const [activeTab, setActiveTab] = useState("login");
     const { isLogged, user, setIsLogged, setUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -36,9 +36,10 @@ function LoginPage() {
 
             const data = await response.json();
             setIsLogged(true);
-            setUser({ username: formData.pseudo, role: "user" }); 
+            setUser({ username: formData.pseudo, role: "user" });
             setFormData({ pseudo: "", email: "", password: "" });
             navigate("/");
+            window.location.reload();
         } catch (error) {
             setError(error.message);
         }
@@ -71,6 +72,7 @@ function LoginPage() {
             setUser(data.user);
             setLoginData({ pseudo: "", password: "" });
             navigate("/");
+            window.location.reload();
             console.log("connexion faite");
         } catch (error) {
             setError(error.message);

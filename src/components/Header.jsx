@@ -15,7 +15,7 @@ function Header() {
         .then(() => {
             setIsLogged(false);
             setUser(null);
-            navigate("/Home");
+            navigate("/");
         })
         .catch(error => console.error("Erreur lors de la déconnexion :", error));
     }

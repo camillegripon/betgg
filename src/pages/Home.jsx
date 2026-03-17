@@ -58,9 +58,9 @@ function Home() {
             <Header />
             <div className="homeContainer">
                 {/* ✅ Panneau latéral pour les paris en cours */}
+
+                    {bets && bets.length > 0 ? (
                 <div className="betsSidebar">
-                    {bets.length > 0 && (
-                        <>
                             <h3>Mes paris en cours</h3>
                             <ul>
                                 {bets.map((bet, index) => (
@@ -72,9 +72,11 @@ function Home() {
 
                                 ))}
                             </ul>
-                        </>
-                    )}
                 </div>
+                    ) : (
+                <div className="emptyColonne"> </div>
+)} 
+
                 <div className="matchesContainer">
                     <div className="matchAVenir">
                         <h2>Matchs à venir</h2>

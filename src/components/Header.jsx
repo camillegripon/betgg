@@ -28,6 +28,10 @@ function Header() {
         navigate("/matchFormData");
 }
 
+    const goToProfil = ()=> {
+        navigate("/profil");
+}
+
     return (
         <header className="header">
             <div className="title">
@@ -38,7 +42,7 @@ function Header() {
             <div className="options">
                 {isLogged ? (
                     <>
-                        <div className="profil">
+                        <div className="profil" onClick={goToProfil}>
                             <img src={`/assets/image/${user.avatar}`} alt="Avatar de l'utilisateur" /><p><span className="font-semibold">{user?.username}</span></p>
                         </div>
                         <div className="monnaie">

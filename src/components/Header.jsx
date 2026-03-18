@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import '../styles/header.css';
 
 function Header() {
-    const { isLogged, user, setIsLogged, setUser, role, setRole } = useContext(AuthContext);
+    const { isLogged, user, setIsLogged, setUser, role, setRole, avatar, setAvatar } = useContext(AuthContext);
     const navigate = useNavigate(); 
 
     function handleLogout() {
@@ -39,7 +39,7 @@ function Header() {
                 {isLogged ? (
                     <>
                         <div className="profil">
-                            <p><span className="font-semibold">{user?.username}</span></p>
+                            <img src={`/assets/image/${user.avatar}`} alt="Avatar de l'utilisateur" /><p><span className="font-semibold">{user?.username}</span></p>
                         </div>
                         <div className="monnaie">
                             {user.neekos} 🪙

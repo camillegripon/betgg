@@ -7,6 +7,7 @@ export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [neekos, setNeekos] = useState(null);
     const [role, setRole] = useState(null);
+    const [avatar, setAvatar] = useState("default.png");
 
     useEffect(() => {
         fetch(`${import.meta.env.VITE_API_BASE_URL}/api/user/check-auth`, {
@@ -19,6 +20,7 @@ export function AuthProvider({ children }) {
             setUser(data.user);
             setNeekos(data.user.neekos);
             setRole(data.user.role);
+            setAvatar(data.user.avatar || "default.png");
             console.log("refresh");
         })
         .catch(() => {
@@ -26,11 +28,12 @@ export function AuthProvider({ children }) {
             setUser(null);
             setNeekos(null);
             setRole(null);
+            setAvatar(null);
         });
     }, []);
 
     return (
-        <AuthContext.Provider value={{ isLogged, setIsLogged, user, setUser, neekos, setNeekos, role, setRole }}>
+        <AuthContext.Provider value={{ isLogged, setIsLogged, user, setUser, neekos, setNeekos, role, setRole, avatar, setAvatar }}>
             {children}
         </AuthContext.Provider>
     );
